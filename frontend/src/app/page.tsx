@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Download, ChevronDown, Mic2, Wand2, Bot, Music, BookOpen, Film, Tv } from 'lucide-react';
 
+// --- Type Definitions ---
 type Language = 'English' | 'Arabic';
 type ApiError = { detail: string };
 type ApiResponse = { language: Language; url: string };
@@ -71,7 +72,6 @@ const TextToSpeechCard = () => {
       setIsLoading(true);
       setError(null);
       try {
-        // This now uses the API_URL variable
         const response = await fetch(`${API_URL}/api/audio/${selectedLanguage}/`);
         if (!response.ok) {
           const errData: ApiError = await response.json();
@@ -79,8 +79,12 @@ const TextToSpeechCard = () => {
         }
         const data: ApiResponse = await response.json();
         setAudioUrl(data.url);
-      } catch (e: any) {
-        setError(e.message);
+      } catch (e) { 
+        if (e instanceof Error) {
+            setError(e.message);
+        } else {
+            setError('An unknown error occurred');
+        }
         console.error("Fetch error:", e);
       } finally {
         setIsLoading(false);
