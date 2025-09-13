@@ -3,7 +3,8 @@ import django
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 
-MONGO_URI = "mongodb://localhost:27017/"
+MONGO_URI = "mongodb+srv://ranjeet9559k_db_user:1fjD4vJ4Q0PbhN0o@cluster0.a9md7o1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
 DB_NAME = "elevenlabs_db" 
 
 
